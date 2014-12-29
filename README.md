@@ -4,7 +4,6 @@ Git Web Hook em PHP
 
 
 ##Sobre
-===========================================
 Verifica alterações do repo git, e faz git clone caso o projeto não exista, ou pull das ultimas alterações do código.
 
 ####Example: Payload.json, retorno API github:
