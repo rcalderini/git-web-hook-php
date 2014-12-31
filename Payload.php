@@ -63,7 +63,7 @@ class Payload {
      * @return String
      */
     public function getRepositoryFullName() {
-        $this->_payload->repository->full_name;
+        return $this->_payload->repository->full_name;
     }
 
     /**
@@ -74,7 +74,7 @@ class Payload {
      * @return String
      */
     public function getRepositoryGitUrl() {
-        $this->_payload->repository->git_url;
+        return $this->_payload->repository->git_url;
     }
 
     /**
@@ -85,7 +85,7 @@ class Payload {
      * @return String
      */
     public function getRepositorySshUrl() {
-        $this->_payload->repository->ssh_url;
+        return $this->_payload->repository->ssh_url;
     }
 
     /**
@@ -96,7 +96,7 @@ class Payload {
      * @return String
      */
     public function getRepositoryCloneUrl() {
-        $this->_payload->repository->clone_url;
+        return $this->_payload->repository->clone_url;
     }
 
 }

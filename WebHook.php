@@ -19,8 +19,9 @@ class WebHook {
     private $_remote_repo;
     private $_branch;
 
-    function __construct($name_repo, $remote_repo, $local_root = "/tmp", $branch = "master") {
-        $this->_local_repo = "$local_root/$name_repo";
+    function __construct($local_repo, $remote_repo, $local_root = "/tmp", $branch = "master") {
+        $this->_local_root = $local_root;
+        $this->_local_repo = "$local_root/$local_repo";
         $this->_remote_repo = $remote_repo;
         $this->_branch = $branch;
     }
