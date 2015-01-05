@@ -19,7 +19,7 @@ class WebHook {
     private $_remote_repo;
     private $_branch;
 
-    function __construct($local_repo, $remote_repo, $local_root = "/etc/puppet/environments/dev/modules", $branch = "master") {
+    function __construct($local_repo, $remote_repo, $local_root = "/etc/puppet/modules", $branch = "master") {
         $this->_local_root = $local_root;
         $this->_local_repo = "$local_root/$local_repo";
         $this->_remote_repo = $remote_repo;
@@ -36,11 +36,11 @@ class WebHook {
         if (file_exists($this->_local_repo)) {
 
             // se o repositório já existe, faz pull das ultimas modificações.
-            $output = shell_exec("cd {$this->_local_repo}/files && git pull");
+            $output = shell_exec("cd {$this->_local_repo}/files && sudo git pull");
         } else {
 
             // Se o repositório não existe, faz clone do projeto
-           $output = shell_exec("cd {$this->_local_root} && mkdir {$this->_local_repo} && cd {$this->_local_repo} && git clone {$this->_remote_repo} files");
+           $output = shell_exec("cd {$this->_local_root} && sudo mkdir {$this->_local_repo} && cd {$this->_local_repo} && sudo git clone {$this->_remote_repo} files");
         }
 
         return $output;
