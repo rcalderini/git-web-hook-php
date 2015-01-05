@@ -13,12 +13,12 @@ try {
     $gitHubWebHook = new GitHubWebHook( );
     $gitHubWebHook->processRequest();
 
-    if (!$gitHubWebHook->validateIPAddress()) {
+    /*if (!$gitHubWebHook->validateIPAddress()) {
         header("HTTP/1.1 401 Unauthorized");
         exit();
-    }
+    }*/
 
-    if (!$gitHubWebHook->validateHubSignature('My secret key')) {
+    if (!$gitHubWebHook->validateHubSignature('passw0rd')) {
         header("HTTP/1.1 401 Unauthorized");
         exit();
     }
@@ -32,14 +32,14 @@ try {
             $gitHubWebHook->getPayload()->getRepositoryName(), 
             $gitHubWebHook->getPayload()->getRepositoryCloneUrl()
             );
-    
-    $output = $webHook->git_exec();
-
+    $output = $webHook->gitExec();
     echo $output;
-
+    
     header("HTTP/1.1 202 Accepted");
     exit();
-} catch (Exception $e) {
+} 
+
+catch (Exception $e) {
     echo 'Exception: ' . $e->getMessage() . PHP_EOL;
 
     header('HTTP/1.1 500 Internal Server Error');

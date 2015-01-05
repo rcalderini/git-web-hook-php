@@ -21,9 +21,9 @@ class GitHubWebHook {
      *
      * Get it from https://api.github.com/meta
      */
-    const GITHUB_IP_BASE = '192.30.252.0';
-    const GITHUB_IP_BITS = 22;
-    const GITHUB_IP_MASK = -1024;
+    const GITHUB_IP_BASE = '192.168.57.5';
+    //const GITHUB_IP_BITS = 22;
+    //const GITHUB_IP_MASK = -1024;
 
     private $_eventType;
     private $_payload;
@@ -86,7 +86,7 @@ class GitHubWebHook {
             throw new Exception('Missing remote address.');
         }
 
-        return (ip2long($_SERVER['REMOTE_ADDR']) & ~((1 << (32 - self::GITHUB_IP_BITS)) - 1)) == ip2long(self::GITHUB_IP_BASE);
+        return (ip2long($_SERVER['REMOTE_ADDR']) == ip2long(self::GITHUB_IP_BASE));
     }
 
     /**
