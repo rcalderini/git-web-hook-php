@@ -36,11 +36,11 @@ class WebHook {
         if (file_exists($this->_local_repo)) {
 
             // se o repositório já existe, faz pull das ultimas modificações.
-            $output = shell_exec("cd {$this->_local_repo} && git pull");
+            $output = shell_exec("cd {$this->_local_repo}/files && git pull");
         } else {
 
             // Se o repositório não existe, faz clone do projeto
-           $output = shell_exec("cd {$this->_local_root} && git clone {$this->_remote_repo}");
+           $output = shell_exec("cd {$this->_local_root} && mkdir {$this->_local_repo} && cd {$this->_local_repo} && git clone {$this->_remote_repo} files");
         }
 
         return $output;
