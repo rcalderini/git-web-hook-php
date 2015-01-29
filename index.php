@@ -14,15 +14,15 @@ try {
     $gitHubWebHook = new GitHubWebHook( );
     $gitHubWebHook->processRequest();
 
-//    if (!$gitHubWebHook->validateIPAddress()) {
-//        header("HTTP/1.1 401 Unauthorized");
-//        exit();
-//    }
+    /*if (!$gitHubWebHook->validateIPAddress()) {
+        header("HTTP/1.1 401 Unauthorized");
+        exit();
+    }*/
 
-//    if (!$gitHubWebHook->validateHubSignature('My secret key')) {
-//        header("HTTP/1.1 401 Unauthorized");
-//        exit();
-//    }
+    if (!$gitHubWebHook->validateHubSignature('passw0rd')) {
+        header("HTTP/1.1 401 Unauthorized");
+        exit();
+    }
 
     echo 'Received ' . $gitHubWebHook->getEventType() . ' in repository ' . $gitHubWebHook->getFullRepositoryName() . PHP_EOL;
 
@@ -39,7 +39,7 @@ try {
     $output = $webHook->gitExec();
 
     echo $output;
-
+    
     header("HTTP/1.1 202 Accepted");
     exit();
 } catch (Exception $e) {
