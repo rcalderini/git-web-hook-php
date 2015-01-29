@@ -99,4 +99,15 @@ class Payload {
         return $this->_payload->repository->clone_url;
     }
 
+    /**
+     * Get Url Branch
+     *
+     * {"ref": "refs/heads/master"}
+     *
+     * @return String
+     */
+    public function getBranch() {
+        return str_replace("refs/heads/", "", $this->_payload->ref);
+    }
+
 }

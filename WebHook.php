@@ -11,7 +11,8 @@
  *
  * @author roger_calderini (Time Core - Nucleo Digital - Grupo RBS)
  */
-class WebHook {
+class WebHook
+{
 
     // Set Variables
     private $_local_root;
@@ -19,7 +20,8 @@ class WebHook {
     private $_remote_repo;
     private $_branch;
 
-    function __construct($local_repo, $remote_repo, $local_root = "/tmp", $branch = "master") {
+    function __construct($local_repo, $remote_repo, $local_root = "/tmp", $branch = "master")
+    {
         $this->_local_root = $local_root;
         $this->_local_repo = "$local_root/$local_repo";
         $this->_remote_repo = $remote_repo;
@@ -28,53 +30,59 @@ class WebHook {
 
     /**
      * Executa o comando git Pull ou Clone
-     * 
-     * @return String A saída do comando executado.
+     *
+     * @return String A saÃ­da do comando executado.
      */
-    public function gitExec() {
+    public function gitExec()
+    {
         $output = "";
-        
-        if (file_exists($this->_local_repo)) {
 
-            // se o repositório já existe, faz pull das ultimas modificações.
-            $output = shell_exec("cd {$this->_local_repo} && git pull");
+        if (file_exists($this->_local_repo)) {
+                // Update no branch fo wook
+                $output .= "comand: cd {$this->_local_repo} && git checkout {$this->_branch} && git pull \n";
+                $output .= shell_exec("cd {$this->_local_repo} && git checkout {$this->_branch} && git pull");
         } else {
-            // Se o repositório não existe, faz clone do projeto
-           $output = shell_exec("cd {$this->_local_root} && git clone {$this->_remote_repo}");
+            // Se o repositÃ³rio nÃ£o existe, faz clone do projeto
+            $output = "comand: cd {$this->_local_root} && git clone {$this->_remote_repo} \n";
+            $output .= shell_exec("cd {$this->_local_root} && git clone {$this->_remote_repo}");
         }
-        
+
         return $output;
     }
-    
+
     /**
-     * 
+     *
      * @return String
      */
-    public function getLocal_root() {
+    public function getLocal_root()
+    {
         return $this->_local_root;
     }
 
     /**
-     * 
+     *
      * @return String
      */
-    public function getLocal_repo() {
+    public function getLocal_repo()
+    {
         return $this->_local_repo;
     }
 
     /**
-     * 
+     *
      * @return String
      */
-    public function getRemote_repo() {
+    public function getRemote_repo()
+    {
         return $this->_remote_repo;
     }
 
     /**
-     * 
+     *
      * @return String
      */
-    public function getBranch() {
+    public function getBranch()
+    {
         return $this->_branch;
     }
 

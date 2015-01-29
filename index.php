@@ -4,6 +4,7 @@
  *
  * @author roger_calderini
  */
+error_reporting(0);
 Header('Content-Type: text/plain; charset=utf-8');
 
 require_once "./GitHubWebHook.php";
@@ -13,15 +14,15 @@ try {
     $gitHubWebHook = new GitHubWebHook( );
     $gitHubWebHook->processRequest();
 
-    if (!$gitHubWebHook->validateIPAddress()) {
-        header("HTTP/1.1 401 Unauthorized");
-        exit();
-    }
+//    if (!$gitHubWebHook->validateIPAddress()) {
+//        header("HTTP/1.1 401 Unauthorized");
+//        exit();
+//    }
 
-    if (!$gitHubWebHook->validateHubSignature('My secret key')) {
-        header("HTTP/1.1 401 Unauthorized");
-        exit();
-    }
+//    if (!$gitHubWebHook->validateHubSignature('My secret key')) {
+//        header("HTTP/1.1 401 Unauthorized");
+//        exit();
+//    }
 
     echo 'Received ' . $gitHubWebHook->getEventType() . ' in repository ' . $gitHubWebHook->getFullRepositoryName() . PHP_EOL;
 
@@ -30,10 +31,12 @@ try {
      */
     $webHook = new WebHook(
             $gitHubWebHook->getPayload()->getRepositoryName(), 
-            $gitHubWebHook->getPayload()->getRepositoryCloneUrl()
+            $gitHubWebHook->getPayload()->getRepositoryCloneUrl(),
+            "/home/roger_calderini/workspace",
+            $gitHubWebHook->getPayload()->getBranch()
             );
     
-    $output = $webHook->git_exec();
+    $output = $webHook->gitExec();
 
     echo $output;
 
