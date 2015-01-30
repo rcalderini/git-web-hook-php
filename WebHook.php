@@ -31,21 +31,20 @@ class WebHook
     /**
      * Executa o comando git Pull ou Clone
      *
-     * @return String A saída do comando executado.
+     * @return String A saÃ­da do comando executado.
      */
     public function gitExec()
     {
         $output = "";
 
-        if (file_exists($this->_local_repo)) {
-                // Update no branch fo wook
-                $output .= "comand: cd {$this->_local_repo} && git checkout {$this->_branch} && git pull \n";
-                $output .= shell_exec("cd {$this->_local_repo} && git checkout {$this->_branch} && git pull");
-        } else {
-            // Se o repositório não existe, faz clone do projeto
+        if (!file_exists($this->_local_repo)) {
+            // Se o repositÃ³rio nÃ£o existe, faz clone do projeto
             $output = "comand: cd {$this->_local_root} && git clone {$this->_remote_repo} \n";
             $output .= shell_exec("cd {$this->_local_root} && git clone {$this->_remote_repo}");
         }
+
+        $output .= "comand: cd {$this->_local_repo} && git checkout {$this->_branch} && git pull \n";
+        $output .= shell_exec("cd {$this->_local_repo} && git checkout {$this->_branch} && git pull");
 
         return $output;
     }
